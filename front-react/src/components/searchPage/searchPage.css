@@ -1,0 +1,6 @@
+.post-area {
+  display: flex;
+  flex-wrap: wrap;
+  direction: row;
+  margin: 20px;
+}
