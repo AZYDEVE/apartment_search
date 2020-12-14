@@ -72,7 +72,7 @@ function SearchPage(props) {
   };
 
   const sortByPrice = () => {
-    const data = allPost.sort(function (a, b) {
+    allPost.sort(function (a, b) {
       if (a.price < b.price) return -1;
       if (a.price > b.price) return 1;
       return 0;
@@ -83,9 +83,20 @@ function SearchPage(props) {
   };
 
   const sortByHood = () => {
-    const data = allPost.sort(function (a, b) {
-      if (a["result-hood"] < b["result-hood"]) return -1;
-      if (a["result-hood"] > b["result-hood"]) return 1;
+    allPost.sort(function (a, b) {
+      if (a["result-hood"] === null) {
+        return -1;
+      }
+      if (b["result-hood"] === null) {
+        return -1;
+      }
+      if (a["result-hood"] !== null && b["result-hood"]) {
+        if (a["result-hood"].toLowerCase() < b["result-hood"].toLowerCase())
+          return -1;
+        if (a["result-hood"].toLowerCase() > b["result-hood"].toLowerCase())
+          return 1;
+      }
+
       return 0;
     });
     setcurrentPost(allPost.slice(indexOfFirstPost, indexOftheLastPost));
