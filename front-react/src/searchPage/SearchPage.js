@@ -5,6 +5,7 @@ import Card from "../components/card/Card";
 import "./searchPage.css";
 import Selector1 from "../components/selector/Selector";
 import Selector2 from "../components/selector/Selector";
+import Selector3 from "../components/selector/Selector";
 
 function SearchPage(props) {
   const history = useHistory();
@@ -14,6 +15,8 @@ function SearchPage(props) {
   const [postPerPage, setPostPerPage] = useState(15);
   let [currentPost, setcurrentPost] = useState();
   const [cityList, setCityList] = useState("");
+  const [filterByCityComp, setFilebyCityComp] = useState(null);
+  const [filerByPriceRange, setFileterByPriceRange] = useState(null);
 
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
@@ -64,15 +67,6 @@ function SearchPage(props) {
     });
 
     setCityList(citis);
-
-    // for (let b = 0; b < temp.length; b++) {
-    //   console.log(JSON.parse(temp[b]));
-    //   console.log("alex");
-    //   selectionForCIty.current.add(JSON.parse(temp[b]));
-    // }
-
-    // const newtemp = JSON.parse(temp);
-    console.log(temp);
   };
 
   const cardViewStyle = {
@@ -128,12 +122,16 @@ function SearchPage(props) {
     console.log(allPost);
   };
 
+  const filtByCity = () => {
+    return;
+  };
+
   const option1 = [
     {
       label: "Price",
     },
     {
-      label: "city",
+      label: "City",
     },
   ];
 
@@ -149,8 +147,32 @@ function SearchPage(props) {
       sortByPrice();
     }
 
-    if (selectedValue.label === "city") {
+    if (selectedValue.label === "City") {
       sortByHood();
+    }
+  };
+
+  const onChangeSelector2 = (selectedValue) => {
+    if (selectedValue.label === "City") {
+      const CitySelector = (
+        <Selector3
+          option={cityList}
+          label="Select City"
+          onChange={onChangeSelector1}
+        />
+      );
+      setFilebyCityComp(CitySelector);
+      setFileterByPriceRange(null);
+    }
+
+    if (selectedValue.label === "Price Range") {
+      const priceRangeBtn = (
+        <div>
+          <input classNmae="low-price" /> <input classNmae="high-price" />
+        </div>
+      );
+      setFileterByPriceRange(priceRangeBtn);
+      setFilebyCityComp(null);
     }
   };
 
@@ -165,13 +187,10 @@ function SearchPage(props) {
         <Selector2
           option={option2}
           label="Filter By"
-          onChange={onChangeSelector1}
+          onChange={onChangeSelector2}
         />
-        <Selector2
-          option={cityList}
-          label="Filter By"
-          onChange={onChangeSelector1}
-        />
+        {filterByCityComp}
+        {filerByPriceRange}
       </div>
       <div className="container mt-3">
         {allPost.length === 0 ? (
