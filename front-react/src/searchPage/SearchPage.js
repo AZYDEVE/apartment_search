@@ -4,6 +4,7 @@ import Pagination from "../components/pagination/Pagination";
 import Card from "../components/card/Card";
 import "./searchPage.css";
 import Selector1 from "../components/selector/Selector";
+import Selector2 from "../components/selector/Selector";
 
 function SearchPage(props) {
   const history = useHistory();
@@ -11,7 +12,8 @@ function SearchPage(props) {
   const [allPost, setAllPost] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(15);
-  let [currentPost, setcurrentPost] = useState([]);
+  let [currentPost, setcurrentPost] = useState();
+  const [cityList, setCityList] = useState("");
 
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
@@ -46,8 +48,31 @@ function SearchPage(props) {
     const data = await res.json();
 
     setAllPost(data);
+    const temp = new Set();
 
-    console.log(allPost);
+    for (let i = 0; i < data.length; i++) {
+      temp.add(
+        JSON.stringify({
+          label: data[i]["result-hood"],
+        })
+      );
+    }
+
+    const citis = [...temp].map((item) => {
+      if (typeof item === "string") return JSON.parse(item);
+      else if (typeof item === "object") return item;
+    });
+
+    setCityList(citis);
+
+    // for (let b = 0; b < temp.length; b++) {
+    //   console.log(JSON.parse(temp[b]));
+    //   console.log("alex");
+    //   selectionForCIty.current.add(JSON.parse(temp[b]));
+    // }
+
+    // const newtemp = JSON.parse(temp);
+    console.log(temp);
   };
 
   const cardViewStyle = {
@@ -106,12 +131,17 @@ function SearchPage(props) {
   const option1 = [
     {
       label: "Price",
-      value: "Price",
     },
     {
       label: "city",
-      value: "city",
     },
+  ];
+
+  const option2 = [
+    {
+      label: "City",
+    },
+    { label: "Price Range" },
   ];
 
   const onChangeSelector1 = (selectedValue) => {
@@ -120,7 +150,6 @@ function SearchPage(props) {
     }
 
     if (selectedValue.label === "city") {
-      // console.log(allPost[0]["result-hood"].toUpperCase());
       sortByHood();
     }
   };
@@ -131,6 +160,16 @@ function SearchPage(props) {
         <Selector1
           option={option1}
           label="Sort By"
+          onChange={onChangeSelector1}
+        />
+        <Selector2
+          option={option2}
+          label="Filter By"
+          onChange={onChangeSelector1}
+        />
+        <Selector2
+          option={cityList}
+          label="Filter By"
           onChange={onChangeSelector1}
         />
       </div>
