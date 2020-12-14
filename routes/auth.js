@@ -75,4 +75,13 @@ router.post("/if_user_exist", async function (req, res, next) {
   }
 });
 
+router.get("/autherized", function (req, res) {
+  console.log(req.user);
+  if (req.user) {
+    res.json({ status: true });
+  } else {
+    res.json({ status: false });
+  }
+});
+
 module.exports = router;

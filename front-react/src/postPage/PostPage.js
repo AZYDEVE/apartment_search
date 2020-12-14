@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import Card from "../components/card/Card";
+
 function Post(props) {
   const [largeImg, setLargeImg] = useState();
-  const [similarPost, setSimilarPost] = useState("");
+
   let data = useLocation();
   let postData = data.state.post;
 
   useEffect(() => {
     getLargeImage(postData.images[0]);
-    getSimilarPost();
   }, []);
 
   useEffect(() => {}, []);
@@ -27,12 +28,18 @@ function Post(props) {
         posts[i]["result-price"].replace(/[^0-9\.-]+/g, "")
       );
       const difference = Math.abs(currentPostPrice - postPrice);
-      if (posts[i]["result-hood"] === currentPostHood && difference < 501) {
+      if (
+        posts[i]["result-hood"] === currentPostHood &&
+        difference < 501 &&
+        posts[i]._id !== postData._id
+      ) {
         matchingApartment.push(posts[i]);
       }
     }
 
-    console.log(matchingApartment);
+    return matchingApartment.map((MatchPost) => {
+      return <Card post={MatchPost} allPost={data.state.allPost} />;
+    });
   };
 
   const getLargeImage = (imageUrl) => {
@@ -66,6 +73,7 @@ function Post(props) {
           __html: postData.postingbody,
         }}
       />
+      <div>{getSimilarPost()}</div>
     </div>
   );
 }
