@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import Pagination from "../pagination/Pagination";
-import Card from "../card/Card";
+import Pagination from "../components/pagination/Pagination";
+import Card from "../components/card/Card";
 import "./searchPage.css";
 
 function SearchPage(props) {
@@ -42,6 +42,7 @@ function SearchPage(props) {
       <Card
         style={cardViewStyle}
         post={post}
+        allPost={allPost}
         function={clickPost}
         currentPage={currentPage}
       />

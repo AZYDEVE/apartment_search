@@ -16,7 +16,11 @@ function CardView(props) {
 
   return (
     <div className="card text-center entireCard" style={props.style}>
-      <Link to={{ pathname: "/post", state: { post: props.post } }}>
+      <Link
+        to={{
+          pathname: "/postPage",
+          state: { post: props.post, allPost: props.allPost },
+        }}>
         <div className="overflow">
           <img className="cardview-image" src={checkImageString()} alt="img1" />
         </div>

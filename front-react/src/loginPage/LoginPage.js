@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import * as loginToken from "../../utility/functionLoginLogoutToken";
+import * as loginToken from "../utility/functionLoginLogoutToken";
 
 function SignIn() {
   const history = useHistory();
