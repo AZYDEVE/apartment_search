@@ -7,7 +7,7 @@ import * as loginToken from "../../utility/functionLoginLogoutToken";
 function SignIn() {
   const history = useHistory();
   const [signInInfo, setSignInInfo] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -15,11 +15,10 @@ function SignIn() {
     const isauthenticated = await loginToken.checkIfUserPasswordMatches(
       signInInfo
     );
-
-    if (isauthenticated.result === true) {
-      sessionStorage.setItem("current-user", signInInfo.email);
+    console.log(isauthenticated.status);
+    if (isauthenticated.status === true) {
       history.push("/search");
-    } else if (isauthenticated.result === false) {
+    } else if (isauthenticated.status === false) {
       swal("You login doesn't work, please try again", { button: false });
     } else {
       swal("Your account don't exist please register", { button: false });
@@ -35,6 +34,14 @@ function SignIn() {
     });
   };
 
+  const handleLogout = () => {
+    fetch("/auth/logout", { method: "get" });
+  };
+
+  const handleother = () => {
+    fetch("/auth/getUser", { method: "get" });
+  };
+
   return (
     <div>
       <div className="SignIn">
@@ -46,13 +53,13 @@ function SignIn() {
             <div className="card-body">
               <form>
                 <div className="form-group">
-                  <label for="inputEmail">Email</label>
+                  <label for="username">Email</label>
                   <input
                     type="text"
-                    id="email"
+                    id="username"
                     className="form-control"
                     placeholder=" "
-                    name="email"
+                    name="username"
                     onChange={handleSignInInput}
                   />
                 </div>
@@ -81,6 +88,8 @@ function SignIn() {
                     onClick={handleSignIn}
                   />
                 </div>
+                <button onClick={handleLogout} />
+                <button onClick={handleother} />
               </form>
             </div>
             <div className="card-footer">

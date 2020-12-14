@@ -25,7 +25,7 @@ export const checkCurrentLogin = async (emailObj) => {
 };
 
 export const checkIfUserPasswordMatches = async (userObj) => {
-  const res = await fetch("/users/check_email_and_password", {
+  const res = await fetch("/auth/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",

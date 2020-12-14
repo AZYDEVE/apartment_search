@@ -1,46 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Pagination from "../pagination/Pagination";
 import Card from "../card/Card";
 import "./searchPage.css";
 
 function SearchPage(props) {
-  const [userinfo, setUserInfo] = useState({});
   const [allPost, setAllPost] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(20);
+  const [postPerPage, setPostPerPage] = useState(15);
 
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
   const currentPost = allPost.slice(indexOfFirstPost, indexOftheLastPost);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const res = await fetch("/get_all_posts", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
-      const data = await res.json();
-      setAllPost(data);
-
-      setUserInfo(sessionStorage.getItem("current-user"));
-    };
-
     fetchPost();
   }, []);
 
-  const getData = async (path, query) => {
-    const res = await fetch(path, {
+  const fetchPost = async () => {
+    const res = await fetch("/get_all_posts", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(query),
+      body: JSON.stringify({}),
     });
     const data = await res.json();
-    return data;
+
+    setAllPost(data);
   };
 
   const clickPost = () => {};
@@ -52,22 +38,22 @@ function SearchPage(props) {
   };
 
   const displayPosts = (posts) => {
-    console.log(posts);
     return currentPost.map((post) => (
       <Card
         style={cardViewStyle}
-        picture={post.images}
-        hood={post["result-hood"]}
-        price={post.price}
-        title={post["result-title"]}
         post={post}
         function={clickPost}
+        currentPage={currentPage}
       />
     ));
   };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const testing = () => {
+    fetch("/auth/getUser", { method: "get" });
   };
 
   return (
@@ -78,6 +64,7 @@ function SearchPage(props) {
         <div className="post-area">{displayPosts(allPost)}</div>
       )}
 
+      <button onClick={testing} />
       <div className="pagination-area">
         <Pagination
           postsPerPage={postPerPage}

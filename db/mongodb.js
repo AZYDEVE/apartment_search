@@ -51,4 +51,19 @@ module.exports = {
       client.close();
     }
   },
+
+  updateData: async (databaseName, collection, query, updateValue) => {
+    const client = mongo();
+    await client.connect();
+    const database = client.db(databaseName);
+    const collections = database.collection(collection);
+
+    try {
+      await collections.updateOne(query, updateValue);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      client.close();
+    }
+  },
 };

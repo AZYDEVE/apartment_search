@@ -7,9 +7,8 @@ import * as loginToken from "../../utility/functionLoginLogoutToken";
 function Register() {
   const history = useHistory();
   const [signUpInfo, setSignUpInfo] = useState({
-    email: "",
     password: "",
-    name: "",
+    username: "",
   });
 
   //updating input value
@@ -25,12 +24,14 @@ function Register() {
   //if no then insert signupinfo to the database ,
   //if yes, inform user
   const checkUserInDb = async () => {
-    const data = await fetch("/users/if_user_exist", {
+    const data = await fetch("/auth/if_user_exist", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: signUpInfo.email.toLowerCase() }),
+      body: JSON.stringify({
+        username: signUpInfo.username.toLowerCase().trim(),
+      }),
     });
 
     const str = await data.json();
@@ -38,10 +39,10 @@ function Register() {
     // str.result == false user dont exit in database else .. exist
     if (str.result === false) {
       createUserInTheDataBase();
-      await loginToken.getLogin({ email: signUpInfo.email.toLowerCase() });
+      // await loginToken.getLogin({ email: signUpInfo.email.toLowerCase() });
 
-      sessionStorage.setItem("current-user", signUpInfo.email);
-      history.push("/search");
+      // sessionStorage.setItem("current-user", signUpInfo.email);
+      // history.push("/search");
     } else {
       swal("You already have an account, please sign in", { button: false });
     }
@@ -49,13 +50,21 @@ function Register() {
 
   // create user in the database
   const createUserInTheDataBase = async () => {
-    await fetch("/users/insert_user", {
+    const registered = await fetch("/auth/insert_user", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(signUpInfo),
     });
+
+    const confirm = await registered.json();
+    console.log(confirm);
+    if (confirm) {
+      history.push("/search");
+    } else {
+      swal("signup fail", { button: false });
+    }
   };
 
   return (
@@ -69,22 +78,11 @@ function Register() {
             <div className="card-body">
               <form>
                 <div className="form-group">
-                  <label for="name">Username</label>
+                  <label for="username">Username</label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    className="form-control"
-                    placeholder=" "
-                    onChange={handleSignUpInput}
-                  />
-                </div>
-                <div className="form-group">
-                  <label for="email">Email</label>
-                  <input
-                    type="text"
-                    id="email"
-                    name="email"
+                    id="username"
+                    name="username"
                     className="form-control"
                     placeholder=" "
                     onChange={handleSignUpInput}

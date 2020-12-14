@@ -1,29 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../front-react/db/mongodb");
+const db = require("../db/mongodb");
 const passwordHash = require("password-hash");
 
-/* GET users listing. */
-router.post("/if_user_exist", async function (req, res, next) {
-  console.log(req.body);
-  const p = await db.getData("apartment", "users", req.body);
-  console.log(p);
-  if (p.length === 0) {
-    res.json({ result: false });
-    console.log(p);
-  } else {
-    res.json({ result: true });
-  }
-});
-
-router.post("/insert_user", async function (req, res, next) {
-  console.log(req.body);
-  const userInfo = req.body;
-  const password = passwordHash.generate(userInfo.password);
-  console.log(password);
-  userInfo.password = password;
-  await db.insertData("apartment", "users", userInfo);
-});
+// router.post("/insert_user", async function (req, res, next) {
+//   console.log(req.body);
+//   const userInfo = req.body;
+//   const password = passwordHash.generate(userInfo.password);
+//   console.log(password);
+//   userInfo.password = password;
+//   await db.insertData("apartment", "users", userInfo);
+// });
 
 //write record the user to currentLogIn collected if user log in successfully
 router.post("/get_token", async function (req, res) {
