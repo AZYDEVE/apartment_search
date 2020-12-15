@@ -11,6 +11,7 @@ function SearchPage(props) {
   const history = useHistory();
 
   const [allPost, setAllPost] = useState([]);
+  let [displayPost, setDisplayPost] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(15);
   let [currentPost, setcurrentPost] = useState();
@@ -20,7 +21,7 @@ function SearchPage(props) {
 
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
-  currentPost = allPost.slice(indexOfFirstPost, indexOftheLastPost);
+  currentPost = displayPost.slice(indexOfFirstPost, indexOftheLastPost);
 
   useEffect(() => {
     fetchPost();
@@ -50,6 +51,7 @@ function SearchPage(props) {
     });
     const data = await res.json();
 
+    setDisplayPost(data);
     setAllPost(data);
     const temp = new Set();
 
@@ -91,23 +93,36 @@ function SearchPage(props) {
   };
 
   const sortByPrice = () => {
-    allPost.sort(function (a, b) {
-      if (a.price < b.price) return -1;
-      if (a.price > b.price) return 1;
+    displayPost.sort(function (a, b) {
+      if (
+        Number(
+          a["result-price"].replace(/[^0-9\.-]+/g, "") <
+            Number(b["result-price"].replace(/[^0-9\.-]+/g, ""))
+        )
+      )
+        return -1;
+      if (
+        Number(
+          a["result-price"].replace(/[^0-9\.-]+/g, "") >
+            Number(b["result-price"].replace(/[^0-9\.-]+/g, ""))
+        )
+      )
+        return 1;
+
       return 0;
     });
 
-    setcurrentPost(allPost.slice(indexOfFirstPost, indexOftheLastPost));
-    console.log(allPost);
+    setcurrentPost(displayPost.slice(indexOfFirstPost, indexOftheLastPost));
+    console.log(displayPost);
   };
 
   const sortByHood = () => {
-    allPost.sort(function (a, b) {
+    displayPost.sort(function (a, b) {
       if (a["result-hood"] === null) {
-        return -1;
+        return 1;
       }
       if (b["result-hood"] === null) {
-        return -1;
+        return 1;
       }
       if (a["result-hood"] !== null && b["result-hood"]) {
         if (a["result-hood"].toLowerCase() < b["result-hood"].toLowerCase())
@@ -118,12 +133,8 @@ function SearchPage(props) {
 
       return 0;
     });
-    setcurrentPost(allPost.slice(indexOfFirstPost, indexOftheLastPost));
-    console.log(allPost);
-  };
-
-  const filtByCity = () => {
-    return;
+    setcurrentPost(displayPost.slice(indexOfFirstPost, indexOftheLastPost));
+    console.log(displayPost);
   };
 
   const option1 = [
@@ -142,7 +153,7 @@ function SearchPage(props) {
     { label: "Price Range" },
   ];
 
-  const onChangeSelector1 = (selectedValue) => {
+  const onChangeSelectorForSorting = (selectedValue) => {
     if (selectedValue.label === "Price") {
       sortByPrice();
     }
@@ -152,13 +163,13 @@ function SearchPage(props) {
     }
   };
 
-  const onChangeSelector2 = (selectedValue) => {
+  const onChangeSelectorForfilter = (selectedValue) => {
     if (selectedValue.label === "City") {
       const CitySelector = (
         <Selector3
           option={cityList}
           label="Select City"
-          onChange={onChangeSelector1}
+          onChange={selectorFilerByCity}
         />
       );
       setFilebyCityComp(CitySelector);
@@ -167,13 +178,34 @@ function SearchPage(props) {
 
     if (selectedValue.label === "Price Range") {
       const priceRangeBtn = (
-        <div>
-          <input classNmae="low-price" /> <input classNmae="high-price" />
+        <div className="price-range">
+          <label for="min-price" className="label-low-price">
+            Min
+          </label>
+          <input classNmae="min-price" />
+          <label for="max-price" className="label-low-price">
+            Max
+          </label>
+          <input classNmae="max-price" />
         </div>
       );
       setFileterByPriceRange(priceRangeBtn);
       setFilebyCityComp(null);
     }
+  };
+
+  const selectorFilerByCity = (selectedValue) => {
+    const temp = [];
+    console.log(displayPost);
+    for (let i = 0; i < allPost.length; i++) {
+      if (allPost[i]["result-hood"] === selectedValue.label) {
+        temp.push(allPost[i]);
+      }
+    }
+
+    setDisplayPost(temp);
+    setCurrentPage(1);
+    console.log(displayPost);
   };
 
   return (
@@ -182,12 +214,12 @@ function SearchPage(props) {
         <Selector1
           option={option1}
           label="Sort By"
-          onChange={onChangeSelector1}
+          onChange={onChangeSelectorForSorting}
         />
         <Selector2
           option={option2}
           label="Filter By"
-          onChange={onChangeSelector2}
+          onChange={onChangeSelectorForfilter}
         />
         {filterByCityComp}
         {filerByPriceRange}
@@ -196,14 +228,14 @@ function SearchPage(props) {
         {allPost.length === 0 ? (
           <h1>Loading</h1>
         ) : (
-          <div className="post-area">{displayPosts(allPost)}</div>
+          <div className="post-area">{displayPosts(displayPost)}</div>
         )}
 
         {/* <button onClick={testing} /> */}
         <div className="pagination-area ">
           <Pagination
             postsPerPage={postPerPage}
-            totalPosts={allPost.length}
+            totalPosts={displayPost.length}
             paginate={paginate}
           />
         </div>
