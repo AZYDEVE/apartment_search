@@ -43,4 +43,28 @@ router.post("/check_user_liked_post", async function (req, res) {
   res.json({ result: false });
 });
 
+router.get("/get_liked_posts", async function (req, res) {
+  const allthelike = await mongodb.getData("apartment", "liked", {
+    username: req.user.username,
+  });
+
+  const allPost = await mongodb.getData("apartment", "postings", {});
+
+  const like = allthelike[0].liked;
+  console.log(like);
+  const temp = [];
+  for (let i = 0; i < allPost.length; i++) {
+    const postid = allPost[i]._id;
+    for (let b = 0; b < like.length; b++) {
+      const likeid = like[b];
+
+      if (postid == likeid) {
+        temp.push(allPost[i]);
+      }
+    }
+  }
+
+  res.json(temp);
+});
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Pagination from "../components/pagination/Pagination";
 import Card from "../components/card/Card";
@@ -80,7 +80,7 @@ function SearchPage(props) {
 
   const cardViewStyle = {
     marginBottom: "40px",
-    borderRadius: "20px ",
+    borderRadius: "10px ",
     overflow: "hidden",
   };
 
@@ -173,11 +173,18 @@ function SearchPage(props) {
   const onChangeSelectorForfilter = (selectedValue) => {
     if (selectedValue.label === "City") {
       const CitySelector = (
-        <Selector3
-          option={cityList}
-          label="Select City"
-          onChange={selectorFilerByCity}
-        />
+        <div>
+          <Selector3
+            option={cityList}
+            label="Select City"
+            onChange={selectorFilerByCity}
+          />
+          <br />
+
+          <button className="btn-reset" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
       );
       setFilebyCityComp(CitySelector);
       setFileterByPriceRange(null);
@@ -295,7 +302,7 @@ function SearchPage(props) {
             <div className="post-area">{displayPosts(displayPost)}</div>
           )}
 
-          <div className="pagination-area ">
+          <div className="pagin">
             <Pagination
               postsPerPage={postPerPage}
               totalPosts={displayPost.length}

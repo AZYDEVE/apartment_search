@@ -3,11 +3,11 @@
 
   display: grid;
   grid-template:
-    "form pos pos pos pos" 200px
-    "form pos pos pos pos" 200px
-    "  . pos pos pos pos" 1800px
-    "  . pag pag pag pag" 100px
-    /400px 20% 20% 20% 20%;
+    "form pos pos pos ." 200px
+    "form pos pos pos ." 200px
+    "  . pos pos pos ." 1800px
+    "  . pag pag . ." 500px
+    /400px 22% 22% 22% 10%;
 }
 
 .nav {
@@ -98,10 +98,7 @@
   margin-left: 40px;
 }
 
-.pagination-area {
-  display: inline;
+.pagin {
   grid-area: pag;
-  display: flex;
-  flex-wrap: wrap;
-  direction: row;
+  margin-left: 60px;
 }

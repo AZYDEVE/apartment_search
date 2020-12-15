@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./pagination.css";
 
 function Pagination(props) {
   const pageNumber = [];
@@ -19,7 +20,18 @@ function Pagination(props) {
   };
 
   return (
-    <nav>
+    <div className="pagination-area">
+      <label className=" label-pagination">
+        You on Page {props.currPage}, there are {pageNumber.length} pages
+      </label>
+      <input
+        className="input-pagination"
+        placeholder={"enter a page number"}
+        value={pageInput.page}
+        onKeyDown={keyPress}
+        onChange={handleChange}
+      />
+
       <ul className="pagination">
         {props.currPage === 1 ? (
           ""
@@ -27,7 +39,7 @@ function Pagination(props) {
           <div>
             <li className="page-item">
               <button
-                className="page-link"
+                className=" btn-pag"
                 onClick={() => {
                   props.paginate(props.currPage - 1);
                 }}>
@@ -38,24 +50,15 @@ function Pagination(props) {
         )}
         <li>
           <button
-            className="page-link"
+            className=" btn-pag"
             onClick={() => {
               props.paginate(props.currPage + 1);
             }}>
             Next
           </button>
-          <label>
-            You on Page {props.currPage}, there are {pageNumber.length} pages
-          </label>
-          <input
-            placeholder={"enter a page number"}
-            value={pageInput.page}
-            onKeyDown={keyPress}
-            onChange={handleChange}
-          />
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }
 

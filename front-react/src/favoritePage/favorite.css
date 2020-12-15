@@ -1,0 +1,9 @@
+.entire_search_page_favor {
+  background-color: #94a5b3;
+  height: 1200px;
+}
+.post-area_favor {
+  display: flex;
+  flex-wrap: wrap;
+  direction: row;
+}

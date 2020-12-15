@@ -1,18 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:600&display=swap");
 
-/* .content.heartActive {
-  border-color: #d14159;
-  background: #421c23;
-} */
 .heart {
   position: absolute;
   background: url("../../utility/images/heart.png") no-repeat;
   background-position: left;
   background-size: 2900%;
-  height: 100px;
-  width: 100px;
-  top: 85%;
-  left: 21%;
+  height: 120px;
+  width: 120px;
+
   cursor: pointer;
 }
 
@@ -28,7 +23,7 @@
   background-position: right;
 }
 @keyframes animate {
-  0% {
+  50% {
     background-position: left;
   }
   100% {

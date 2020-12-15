@@ -5,11 +5,13 @@ import Register from "./register/Register";
 import Login from "./loginPage/LoginPage";
 import Search from "./searchPage/SearchPage";
 import postPage from "./postPage/PostPage";
+import Favorite from "./favoritePage/Favorite";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/favorite" component={Favorite} />
         <Route path="/register" component={Register} />
         <Route path="/postPage" component={postPage} />
         <Route path="/search" component={Search} />

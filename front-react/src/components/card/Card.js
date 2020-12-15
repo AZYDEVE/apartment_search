@@ -16,6 +16,9 @@ function CardView(props) {
 
   return (
     <div className="card text-center entireCard" style={props.style}>
+      <div className="heart-postcard">
+        <Heart post={props.post} currentpage={props.currentPage} />
+      </div>
       <Link
         to={{
           pathname: "/postPage",
@@ -40,7 +43,6 @@ function CardView(props) {
         </button> */}
         </div>
       </Link>
-      <Heart post={props.post} currentpage={props.currentPage} />
     </div>
   );
 }

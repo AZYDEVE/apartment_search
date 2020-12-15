@@ -23,7 +23,7 @@
   width: 300px;
   background-color: whitesmoke;
   opacity: 0.8;
-  margin: 20px;
+  margin: 30px;
 }
 
 .card-button {
@@ -44,4 +44,10 @@
 
 .card-title {
   font-size: 22px;
+}
+
+.heart-postcard {
+  position: relative;
+  right: 180px;
+  top: -40px;
 }

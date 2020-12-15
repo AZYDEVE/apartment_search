@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/navBar/NavBar";
 import Card from "../components/card/Card";
+import "./postPage.css";
 
 function Post(props) {
   const [largeImg, setLargeImg] = useState();
@@ -12,8 +13,6 @@ function Post(props) {
   useEffect(() => {
     getLargeImage(postData.images[0]);
   }, []);
-
-  useEffect(() => {}, []);
 
   const getSimilarPost = () => {
     const posts = data.state.allPost;
@@ -67,15 +66,21 @@ function Post(props) {
   return (
     <div>
       <Navbar />
-      <div className="container postInfo">
-        <img src={largeImg} alt="large" />
-        <div>{smallImage()}</div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: postData.postingbody,
-          }}
-        />
-        <div>{getSimilarPost()}</div>
+      <div className="entire-Page-postPage ">
+        <div className="container justify-center postInfo">
+          <img src={largeImg} alt="large" className="justify-self-center" />
+
+          <div>{smallImage()}</div>
+          <div
+            className="dangeroutPost"
+            dangerouslySetInnerHTML={{
+              __html: postData.postingbody,
+            }}
+          />
+        </div>
+        <div className="similar_post">
+          <div>{getSimilarPost()}</div>
+        </div>
       </div>
     </div>
   );
