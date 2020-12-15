@@ -6,12 +6,27 @@ import Navbar from "../components/navBar/NavBar";
 import "./favorite.css";
 
 function Favorite(props) {
+  const history = useHistory();
   const [myfavorite, setMyFavorite] = useState([]);
   let [allpost, setAllpost] = useState([]);
 
   useEffect(() => {
     getListOflikedPost();
   }, []);
+
+  useEffect(() => {
+    checkLogin();
+  });
+
+  const checkLogin = async () => {
+    console.log("checkingLogin");
+    const data = await fetch("/auth/autherized", { method: "get" });
+    const result = await data.json();
+    console.log(result);
+    if (result.status === false) {
+      history.push("/");
+    }
+  };
 
   const getListOflikedPost = async () => {
     const allTheLike = await fetch("/get_liked_posts", { method: "get" });

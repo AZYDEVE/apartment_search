@@ -20,10 +20,11 @@
 
 .home-logo {
   cursor: pointer;
-  margin-left: 200px;
+  margin-left: 180px;
 }
 
 .home-nav-link a {
+  margin-left: 120px;
   font-weight: 500;
   font-size: 22px;
   color: #000000;
@@ -38,7 +39,6 @@
 
 .home-nav-link li {
   display: inline;
-  padding: 0px 25px;
 }
 
 .home-nav-link li a {
@@ -46,7 +46,7 @@
 }
 
 .home-nav-link li a:hover {
-  color: #ffffff;
+  color: #d95436;
 }
 
 .homeLogOut {

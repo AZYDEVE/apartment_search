@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import * as loginToken from "../utility/functionLoginLogoutToken";
 import "./register.css";
+import logo from "../utility/images/home.png";
 
 function Register() {
   const history = useHistory();
@@ -71,6 +72,9 @@ function Register() {
   return (
     <div>
       <div className="SignUp">
+        <div className="signin-logo-name">
+          <img src={logo} alt="logo" className="logo-img" />
+        </div>
         <div className="container-fluid d-flex justify-content-center">
           <div className="signcard-signup">
             <div className="card-title-register">

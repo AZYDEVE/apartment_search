@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import * as loginToken from "../utility/functionLoginLogoutToken";
 import "./login.css";
+import logo from "../utility/images/home.png";
 
 function SignIn() {
   const history = useHistory();
@@ -46,6 +47,9 @@ function SignIn() {
   return (
     <div>
       <div className="SignIn">
+        <div className="signin-logo-name">
+          <img src={logo} alt="logo" className="logo-img" />
+        </div>
         <div className="container-fluid d-flex justify-content-center">
           <div className="signcard">
             <div className="card-title-login">
