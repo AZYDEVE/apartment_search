@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import * as loginToken from "../utility/functionLoginLogoutToken";
+import "./register.css";
 
 function Register() {
   const history = useHistory();
@@ -72,56 +73,39 @@ function Register() {
       <div className="SignUp">
         <div className="container-fluid d-flex justify-content-center">
           <div className="signcard-signup">
-            <div className="card-header">
-              <h3>Sign Up</h3>
+            <div className="card-title-register">
+              <h2>Sign Up</h2>
             </div>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label for="username">Username</label>
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    className="form-control"
-                    placeholder=" "
-                    onChange={handleSignUpInput}
-                  />
-                </div>
 
-                <div className="form-group">
-                  <label for="password">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="form-control"
-                    placeholder=""
-                    onChange={handleSignUpInput}
-                  />
-                </div>
+            <input
+              className="user_name_signup"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="User Name "
+              onChange={handleSignUpInput}
+            />
 
-                <div className="form-group">
-                  <input
-                    className="btn btn-dark btn-sm"
-                    style={{
-                      marginTop: "10px",
-                      width: "100px",
-                      padding: "8px",
-                    }}
-                    value="Sign Up"
-                    onClick={checkUserInDb}
-                  />
-                </div>
+            <input
+              className="password_signup"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleSignUpInput}
+            />
 
-                <div className="form-group">
-                  Already an user?{" "}
-                  <Link className="card-footerText" to="/login">
-                    Sign In
-                  </Link>
-                  <br />
-                </div>
-              </form>
+            <input
+              className="btn btn-signup "
+              value="Sign Up"
+              onClick={checkUserInDb}
+            />
+            <br />
+            <div className="form-group">
+              <Link className="card-footerText" to="/login">
+                Go Sign In
+              </Link>
+              <br />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
+import Navbar from "../components/navBar/NavBar";
 import Card from "../components/card/Card";
 
 function Post(props) {
@@ -65,15 +65,18 @@ function Post(props) {
   };
 
   return (
-    <div className="container postInfo">
-      <img src={largeImg} alt="large" />
-      <div>{smallImage()}</div>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: postData.postingbody,
-        }}
-      />
-      <div>{getSimilarPost()}</div>
+    <div>
+      <Navbar />
+      <div className="container postInfo">
+        <img src={largeImg} alt="large" />
+        <div>{smallImage()}</div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: postData.postingbody,
+          }}
+        />
+        <div>{getSimilarPost()}</div>
+      </div>
     </div>
   );
 }

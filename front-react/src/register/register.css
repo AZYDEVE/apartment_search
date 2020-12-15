@@ -1,0 +1,103 @@
+body {
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+}
+
+.SignUp {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)),
+    url(../utility/images/loginBackground.jpeg) center center / cover no-repeat;
+}
+
+.container-fluid {
+  align-content: center;
+  height: 100vh;
+}
+
+.logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 300px;
+  margin-left: 60px;
+  margin-top: 50px;
+}
+
+.signcard-signup {
+  display: grid;
+  background-color: transparent;
+  height: 300px;
+  width: 300px;
+  margin-top: auto;
+  margin-bottom: 450px;
+  justify-items: center;
+  row-gap: 10px;
+  grid-template:
+    "title" 20%
+    "usenam" 20%
+    "passwod" 20%
+    "btnnn" 20%
+    "fotex"
+    / 100%;
+}
+
+.card-title-register {
+  grid-area: title;
+  color: #ffffff;
+  font-size: large;
+}
+
+.user_name_signup {
+  grid-area: usenam;
+  background-color: #ffffff;
+  color: #000000;
+  width: 250px;
+  height: 60px;
+  border: 2px solid#3c240f;
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.password_signup {
+  grid-area: passwod;
+  background-color: #ffffff;
+  color: #000000;
+  width: 250px;
+  height: 60px;
+  border: 2px solid#3c240f;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+.btn-signup {
+  grid-area: btnnn;
+  background-color: #ffffff;
+  color: #000000;
+  width: 140px;
+  height: 60px;
+  border: 2px solid#3c240f;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.card-footerText {
+  grid-area: fotex;
+  color: #ffffff;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #d95436;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 250px;
+  }
+}

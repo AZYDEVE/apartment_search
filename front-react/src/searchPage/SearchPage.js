@@ -6,6 +6,7 @@ import "./searchPage.css";
 import Selector1 from "../components/selector/Selector";
 import Selector2 from "../components/selector/Selector";
 import Selector3 from "../components/selector/Selector";
+import Navbar from "../components/navBar/NavBar";
 
 function SearchPage(props) {
   const history = useHistory();
@@ -18,6 +19,12 @@ function SearchPage(props) {
   const [cityList, setCityList] = useState("");
   const [filterByCityComp, setFilebyCityComp] = useState(null);
   const [filerByPriceRange, setFileterByPriceRange] = useState(null);
+  const [priceInputValue, setPriceInputValue] = useState({
+    min: null,
+    max: null,
+  });
+
+  console.log(priceInputValue.min);
 
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
@@ -179,14 +186,34 @@ function SearchPage(props) {
     if (selectedValue.label === "Price Range") {
       const priceRangeBtn = (
         <div className="price-range">
-          <label for="min-price" className="label-low-price">
-            Min
-          </label>
-          <input classNmae="min-price" />
-          <label for="max-price" className="label-low-price">
-            Max
-          </label>
-          <input classNmae="max-price" />
+          <div className="min-holder">
+            <input
+              className="min-price"
+              type="number"
+              placeholder="Min"
+              value={priceInputValue.min}
+              onChange={selectorMin}
+            />
+          </div>
+          <div className="max-holder">
+            <input
+              className="max-price"
+              type="number"
+              placeholder="Max"
+              value={priceInputValue.max}
+              onChange={selectorMax}
+            />
+          </div>
+          <button
+            className="btn-price-range"
+            onClick={() => {
+              handelPriceRangeBtn();
+            }}>
+            Submit
+          </button>
+          <button className="btn-reset" onClick={handleReset}>
+            Reset
+          </button>
         </div>
       );
       setFileterByPriceRange(priceRangeBtn);
@@ -208,36 +235,74 @@ function SearchPage(props) {
     console.log(displayPost);
   };
 
-  return (
-    <div className="entire_search_page">
-      <div className="filter_form">
-        <Selector1
-          option={option1}
-          label="Sort By"
-          onChange={onChangeSelectorForSorting}
-        />
-        <Selector2
-          option={option2}
-          label="Filter By"
-          onChange={onChangeSelectorForfilter}
-        />
-        {filterByCityComp}
-        {filerByPriceRange}
-      </div>
-      <div className="container mt-3">
-        {allPost.length === 0 ? (
-          <h1>Loading</h1>
-        ) : (
-          <div className="post-area">{displayPosts(displayPost)}</div>
-        )}
+  const selectorMin = (inputValue) => {
+    priceInputValue.min = inputValue.target.value;
+  };
 
-        {/* <button onClick={testing} /> */}
-        <div className="pagination-area ">
-          <Pagination
-            postsPerPage={postPerPage}
-            totalPosts={displayPost.length}
-            paginate={paginate}
+  const selectorMax = (inputValue) => {
+    priceInputValue.max = inputValue.target.value;
+  };
+
+  const handelPriceRangeBtn = () => {
+    const temp = [];
+    for (let i = 0; i < displayPost.length; i++) {
+      const minPost = Number(
+        displayPost[i]["result-price"].replace(/[^0-9\.-]+/g, "")
+      );
+
+      if (
+        minPost >= parseInt(priceInputValue.min, 10) &&
+        minPost <= parseInt(priceInputValue.max, 10)
+      ) {
+        temp.push(displayPost[i]);
+      }
+    }
+    console.log(temp);
+    setDisplayPost(temp);
+  };
+
+  const handleReset = () => {
+    setDisplayPost(allPost);
+  };
+
+  return (
+    <div>
+      <Navbar className="nav" />
+      <div className="entire_search_page">
+        <div className="filter_form">
+          <Selector1
+            className="selector1"
+            option={option1}
+            label="Sort By"
+            onChange={onChangeSelectorForSorting}
           />
+          <div className="selector2">
+            <Selector2
+              option={option2}
+              label="Filter By"
+              onChange={onChangeSelectorForfilter}
+            />
+          </div>
+          <div className="selector3">
+            {filterByCityComp}
+            {filerByPriceRange}
+          </div>
+        </div>
+        <div className=" post-container">
+          {allPost.length === 0 ? (
+            <h1>Loading</h1>
+          ) : (
+            <div className="post-area">{displayPosts(displayPost)}</div>
+          )}
+
+          <div className="pagination-area ">
+            <Pagination
+              postsPerPage={postPerPage}
+              totalPosts={displayPost.length}
+              paginate={paginate}
+              currPage={currentPage}
+            />
+          </div>
         </div>
       </div>
     </div>

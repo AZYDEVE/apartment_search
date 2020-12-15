@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import * as loginToken from "../utility/functionLoginLogoutToken";
+import "./login.css";
 
 function SignIn() {
   const history = useHistory();
@@ -47,57 +48,39 @@ function SignIn() {
       <div className="SignIn">
         <div className="container-fluid d-flex justify-content-center">
           <div className="signcard">
-            <div className="card-header">
-              <h3>Sign In</h3>
+            <div className="card-title-login">
+              <h2>Sign In</h2>
             </div>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label for="username">Email</label>
-                  <input
-                    type="text"
-                    id="username"
-                    className="form-control"
-                    placeholder=" "
-                    name="username"
-                    onChange={handleSignInInput}
-                  />
-                </div>
-                <div className="form group">
-                  <label for="inputPassword">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    className="form-control"
-                    placeholder=" "
-                    name="password"
-                    onChange={handleSignInInput}
-                  />
-                </div>
-                <br />
 
-                <div className="form-group">
-                  <input
-                    className="btn btn-dark"
-                    style={{
-                      marginTop: "10px",
-                      width: "100px",
-                      padding: "8px",
-                    }}
-                    value="Sign In"
-                    onClick={handleSignIn}
-                  />
-                </div>
-                <button onClick={handleLogout} />
-                <button onClick={handleother} />
-              </form>
-            </div>
-            <div className="card-footer">
-              <div>
-                <Link className="card-footerText" to="/register">
-                  Sign up here
-                </Link>
-              </div>
+            <input
+              type="text"
+              id="username"
+              className="user_name"
+              placeholder="User Name "
+              name="username"
+              onChange={handleSignInInput}
+            />
+
+            <input
+              type="password"
+              id="password"
+              className="password"
+              placeholder="Password "
+              name="password"
+              onChange={handleSignInInput}
+            />
+
+            <input
+              className="btn btn-signin "
+              value="Sign In"
+              onClick={handleSignIn}
+            />
+            <br />
+
+            <div className="footer">
+              <Link className="card-footerText" to="/register">
+                Sign up here
+              </Link>
             </div>
           </div>
         </div>

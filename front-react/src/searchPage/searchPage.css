@@ -1,6 +1,107 @@
+.entire_search_page {
+  background-color: #94a5b3;
+
+  display: grid;
+  grid-template:
+    "form pos pos pos pos" 200px
+    "form pos pos pos pos" 200px
+    "  . pos pos pos pos" 1800px
+    "  . pag pag pag pag" 100px
+    /400px 20% 20% 20% 20%;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.filter_form {
+  grid-area: form;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.selector2 {
+  margin-top: 30px;
+}
+
+.selector3 {
+  margin-top: 30px;
+}
+
+.price-range {
+  display: grid;
+  grid-template:
+    "lmin lmin " 40px
+    "lmax lmax " 40px
+    "btnS btnR" 40px
+    /100px 150px;
+  row-gap: 10px;
+}
+
+.min-holder {
+  grid-area: lmin;
+}
+
+.max-holder {
+  grid-area: lmax;
+}
+
+.btn-price-range {
+  grid-area: btnS;
+  height: 40px;
+  width: 80px;
+  background-color: #292b2c;
+  opacity: 0.8;
+  border: 3px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.btn-reset {
+  grid-area: btnR;
+  height: 40px;
+  width: 80px;
+  background-color: #292b2c;
+  opacity: 0.8;
+  border: 3px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.min-price {
+  height: 40px;
+  border: 3px;
+  border-radius: 6px;
+}
+
+.max-price {
+  height: 40px;
+  border: 3px;
+  border-radius: 6px;
+}
+
+.post-container {
+  grid-area: pos;
+}
+
 .post-area {
   display: flex;
   flex-wrap: wrap;
   direction: row;
-  margin: 20px;
+  margin-top: 30px;
+  margin-left: 40px;
+}
+
+.pagination-area {
+  display: inline;
+  grid-area: pag;
+  display: flex;
+  flex-wrap: wrap;
+  direction: row;
 }
