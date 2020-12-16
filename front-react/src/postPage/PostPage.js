@@ -48,7 +48,6 @@ function Post(props) {
       return newUrl;
     } else return "";
   };
-  console.log(postData);
 
   const smallImage = () => {
     return postData.images.map((imgUrl) => (

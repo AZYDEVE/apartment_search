@@ -11,7 +11,6 @@ function Pagination(props) {
 
   const keyPress = (e) => {
     if (e.keyCode === 13) {
-      console.log("value", e.target.value);
       props.paginate(pageInput);
     }
   };

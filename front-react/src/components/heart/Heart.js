@@ -18,7 +18,7 @@ function Heart(props) {
     });
 
     const likeOrNot = await data.json();
-    console.log(likeOrNot);
+
     setLike(likeOrNot.result);
   };
 
@@ -34,8 +34,7 @@ function Heart(props) {
   };
 
   const modifyLikedList = async (url, obj) => {
-    console.log(like);
-    const res = await fetch(url, {
+    await fetch(url, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

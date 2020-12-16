@@ -19,10 +19,9 @@ function Favorite(props) {
   });
 
   const checkLogin = async () => {
-    console.log("checkingLogin");
     const data = await fetch("/auth/autherized", { method: "get" });
     const result = await data.json();
-    console.log(result);
+
     if (result.status === false) {
       history.push("/");
     }

@@ -24,8 +24,6 @@ function SearchPage(props) {
     max: null,
   });
 
-  console.log(priceInputValue.min);
-
   const indexOftheLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOftheLastPost - postPerPage;
   currentPost = displayPost.slice(indexOfFirstPost, indexOftheLastPost);
@@ -39,10 +37,9 @@ function SearchPage(props) {
   });
 
   const checkLogin = async () => {
-    console.log("checkingLogin");
     const data = await fetch("/auth/autherized", { method: "get" });
     const result = await data.json();
-    console.log(result);
+
     if (result.status === false) {
       history.push("/");
     }
@@ -120,7 +117,6 @@ function SearchPage(props) {
     });
 
     setcurrentPost(displayPost.slice(indexOfFirstPost, indexOftheLastPost));
-    console.log(displayPost);
   };
 
   const sortByHood = () => {
@@ -141,7 +137,6 @@ function SearchPage(props) {
       return 0;
     });
     setcurrentPost(displayPost.slice(indexOfFirstPost, indexOftheLastPost));
-    console.log(displayPost);
   };
 
   const option1 = [
@@ -230,7 +225,7 @@ function SearchPage(props) {
 
   const selectorFilerByCity = (selectedValue) => {
     const temp = [];
-    console.log(displayPost);
+
     for (let i = 0; i < allPost.length; i++) {
       if (allPost[i]["result-hood"] === selectedValue.label) {
         temp.push(allPost[i]);
@@ -239,7 +234,6 @@ function SearchPage(props) {
 
     setDisplayPost(temp);
     setCurrentPage(1);
-    console.log(displayPost);
   };
 
   const selectorMin = (inputValue) => {
@@ -264,7 +258,7 @@ function SearchPage(props) {
         temp.push(displayPost[i]);
       }
     }
-    console.log(temp);
+
     setDisplayPost(temp);
   };
 

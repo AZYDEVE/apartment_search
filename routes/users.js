@@ -3,24 +3,12 @@ const router = express.Router();
 const db = require("../db/mongodb");
 const passwordHash = require("password-hash");
 
-// router.post("/insert_user", async function (req, res, next) {
-//   console.log(req.body);
-//   const userInfo = req.body;
-//   const password = passwordHash.generate(userInfo.password);
-//   console.log(password);
-//   userInfo.password = password;
-//   await db.insertData("apartment", "users", userInfo);
-// });
-
-//write record the user to currentLogIn collected if user log in successfully
 router.post("/get_token", async function (req, res) {
   console.log(req.body);
   const p = await db.insertData("apartment", "currentLogIn", req.body);
   res.json(p);
 });
 
-// check if the user email and password matches with the user database
-// if yes, record the user email to the currentLogin and send back {result: true} , else send back {result : false}
 router.post("/check_email_and_password", async function (req, res) {
   const token = await db.getData("apartment", "currentLogIn", {
     email: req.body.email,

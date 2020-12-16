@@ -61,7 +61,7 @@ function Register() {
     });
 
     const confirm = await registered.json();
-    console.log(confirm);
+
     if (confirm) {
       history.push("/search");
     } else {

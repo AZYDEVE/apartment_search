@@ -17,7 +17,7 @@ function SignIn() {
     const isauthenticated = await loginToken.checkIfUserPasswordMatches(
       signInInfo
     );
-    console.log(isauthenticated.status);
+
     if (isauthenticated.status === true) {
       history.push("/search");
     } else if (isauthenticated.status === false) {
