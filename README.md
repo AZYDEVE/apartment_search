@@ -23,7 +23,7 @@
 - The pagination at the bottom of search page, Users can type in page numbers to the input box for navigating to different pages
 - Users can like and unlike a post. The liked posts are kept in the Favorite page. Users can unlike the page to remove from the Favorite page
 - Users clicking the posts will bring them to the post detail page. The page not only shows apartment details, but also recommends similar posts with $500 difference in price.
-
+### App screen shot:
 ![alt text](https://github.com/AZYDEVE/apartment_search/blob/master/front-react/src/utility/images/loginPage.png)
 ![alt text](https://github.com/AZYDEVE/apartment_search/blob/master/front-react/src/utility/images/search%20page.png)
 ![alt text](https://github.com/AZYDEVE/apartment_search/blob/master/front-react/src/utility/images/postPage.png)
