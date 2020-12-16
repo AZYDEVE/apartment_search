@@ -10,9 +10,10 @@
 
 ### Instructions to build:
 - git clone the files 
-- npm install in root folder
+- npm install in the root folder
+- type npm run dev to start the backend server  
 - npm install in the Front-react folder  
-- npm install in the front-react folder
+- type yarn start to start the front end 
 - go to localhoust://3000/ to see the web application. 
 
 ### Instructions for using the web app:
