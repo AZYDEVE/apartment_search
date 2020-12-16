@@ -17,18 +17,6 @@
 
 ### Instructions for using the web app:
 - Sign up as a user in the sign up page
-- the web app uses passport-local strategy for authentications. 
-- The database stores only the hashed passwords
-- In the Search page, the selector form allows sorting and filtering the posts 
-- the pagination at the bottom, Users can type in page numbers to the input box for natigating to different pages 
-- users can like and unlike a post. The liked post are kept in the Favorite page. users can unlike the page to remove from the Favorite page
-
-
-
-
-### screenshoot:
-
-- Sign up as a user in the sign up page
 - The web app uses passport-local strategy for authentications. This allows users remain login in multiple sessions until logout. 
 - The database stores only the hashed passwords
 - In the Search page, the selector form allows sorting and filtering the posts
