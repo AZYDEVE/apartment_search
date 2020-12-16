@@ -9,7 +9,9 @@
 ### This website allows users to create posts for renting out their driveways and sechedule appointment when they need to use others'. 
 
 ### Instructions to build:
-- git clone the files 
+- in MongoDB, create a database name "apartment" , and the following collection "liked", "postings" and "users"
+- up load the Apt file https://drive.google.com/file/d/1lIYL-mWYfB0L8L4tRXuIaZaxOM61J1YF/view?usp=sharing  to the postings collect. 
+- git clone the files from this repository 
 - npm install in the root folder
 - type npm run dev to start the backend server  
 - npm install in the Front-react folder  
