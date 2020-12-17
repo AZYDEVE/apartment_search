@@ -3,7 +3,11 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/navBar/NavBar";
 import Card from "../components/card/Card";
 import "./postPage.css";
-
+/* Your code is beautifully organized and is very easy to read and understand
+* This might be a minor suggestion but it helped me -  avoid using any static values like '0' and '501'
+* Either assign 501 to a variable which explains what the number is or comment on top of it (Previous is preffered)
+* This helps another developer work on your code without interacting with you and it is also a good practices to have any numbers hidden
+*/
 function Post(props) {
   const [largeImg, setLargeImg] = useState();
 
