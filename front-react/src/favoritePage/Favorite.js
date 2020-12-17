@@ -44,6 +44,11 @@ function Favorite(props) {
     allpost = postData;
   };
 
+  /* It is recommended to use external css for static values of style.
+   * In case you have some dynamic variables like colors exported from a .js file or screen sizes from a .js file - you can style variables
+   * Or you can ditch the .css files altogether and create something like a stylesheet variable/object: https://reactnative.dev/docs/stylesheet
+   * This is react native but you can apply the concept in React.js
+   */
   const cardViewStyle = {
     marginBottom: "40px",
     borderRadius: "10px ",

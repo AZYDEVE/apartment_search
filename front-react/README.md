@@ -1,3 +1,8 @@
+Reviewer comments front-end:
+
+1. You have organized the code well but it is generally a good idea to put all the js files inside the components folder since everything in React is a component as it is technically a SPA. Check these links: Component based arch - https://medium.com/@dan.shapiro1210/understanding-component-based-architecture-3ff48ec0c238 & SPA - https://medium.com/@NeotericEU/single-page-application-vs-multiple-page-application-2591588efe58
+2. It is better if you separate .css files into a css folder because it is better to have all the styles in one folder and also gives you scope to incorporate sass or scss if you desire in future.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
