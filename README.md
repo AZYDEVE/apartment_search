@@ -1,3 +1,12 @@
+Reviewer comments:
+1. Your service side code is beautiful and well organized for example the mongo function the you created and the way you have closed every connection. I am definitely going to use this as a standard for my next application.
+2. Do remove any commented code that is there
+3. Front end styling:
+   a. Your background and images are great, you can use border and padding for some of your components like login page
+   b. The colors can be more consistent: I suggest deciding a color-palette and sticking to it while development
+
+Great work! Good luck!
+
 # Home Sweet Home
 
 ### Author: Alex Yang 
